@@ -179,6 +179,22 @@ Output: `dist/The_Archivist.exe`.
 
 ---
 
+## Future Expansion: Cloud-Native Ingestion
+
+The Archivist currently runs as a desktop app — a deliberate choice, since the column-mapping and review step benefits from a human looking at a live JSON preview before anything gets written. That works well for normal-sized datasets, but it doesn't scale to very large ones: a multi-hundred-thousand-row dataset run entirely on local hardware, rate-limited to stay under API limits, can take days of unattended desktop runtime to fully process.
+
+**The plan: a browser-based companion app for large batch runs, paired with the same EC2 infrastructure already planned for [The Compendium's vector search migration](https://github.com/agoodtheory/compendium#future-expansion-self-hosted-vector-search).**
+
+The rough shape of it:
+- A lightweight web frontend handles file upload (to S3) and the same column-mapping review UI the desktop app already has — that human-in-the-loop step isn't going away, it's just moving to a browser
+- Once mapping is confirmed, the actual processing — fuzzy matching, cost estimation, summarization, duplicate checking, and delivery to DynamoDB/S3/Pinecone — runs headlessly on an EC2 instance instead of the user's local machine
+- That instance can reasonably be the same one hosting Qdrant once that migration happens (see the Compendium repo), since both workloads are intermittent rather than constant — started on demand, stopped when idle, same start/stop cost pattern
+- The desktop app stays relevant for smaller, ad-hoc additions where local processing is fast enough that cloud round-trip latency isn't worth it; the web app targets the large-batch case specifically, rather than replacing the desktop tool outright
+
+This turns a "leave a desktop app running for two days" workflow into "upload a file and check back later" — without giving up the manual review step that keeps bad column mappings from silently corrupting the schema.
+
+---
+
 ## License
 
 MIT — see [LICENSE](LICENSE).
