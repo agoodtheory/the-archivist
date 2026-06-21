@@ -1,0 +1,9 @@
+boto3
+openai
+pinecone
+python-dotenv
+pandas
+openpyxl
+pdfplumber
+thefuzz
+python-Levenshtein

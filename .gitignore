@@ -1,0 +1,27 @@
+# Secrets & local config — never commit
+.env
+config.json
+
+# PyInstaller build artifacts
+build/
+dist/
+*.spec
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Local data / export output
+output/
+*.log
+
+# OS cruft
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
