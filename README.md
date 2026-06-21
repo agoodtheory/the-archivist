@@ -195,6 +195,12 @@ This turns a "leave a desktop app running for two days" workflow into "upload a 
 
 ---
 
+## Credits
+
+App icon: <a href="https://www.flaticon.com/free-icons/all-seeing-eye" title="all-seeing eye icons">All-seeing eye icons created by Freepik - Flaticon</a>
+
+---
+
 ## License
 
 MIT — see [LICENSE](LICENSE).
